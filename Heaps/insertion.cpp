@@ -26,6 +26,44 @@ class heap {
         }
 
     }
+    // 
+    void deletefromHeap() {
+    if(size == 0) {
+        cout << "nothing to delete" << endl;
+        return;
+    }
+
+    // Step 1: Put last element into root
+    arr[1] = arr[size];
+    // Step 2: Remove last element
+    size--;
+
+    // Step 3: Take root node to its correct position (Heapify Down)
+    int i = 1;
+    while(i <= size) {
+        int leftIndex = 2 * i;
+        int rightIndex = 2 * i + 1;
+        int largest = i;
+
+        // Check if left child exists and is greater than current largest
+        if(leftIndex <= size && arr[largest] < arr[leftIndex]) {
+            largest = leftIndex;
+        }
+        // Check if right child exists and is greater than current largest
+        if(rightIndex <= size && arr[largest] < arr[rightIndex]) {
+            largest = rightIndex;
+        }
+
+        // If the largest is not the current node, swap and continue
+        if(largest != i) {
+            swap(arr[i], arr[largest]);
+            i = largest;
+        } else {
+            return; // Node is in correct position
+        }
+    }
+}
+
     void print(){
         for(int i = 1; i<=size; i++){
             cout << arr[i] <<" ";
@@ -33,6 +71,25 @@ class heap {
         }cout<<endl;
     }
 };
+void heapify(int arr[], int n, int i){
+    int largest = i;
+    int left = 2*i;
+    int right = 2*i+1;
+
+    // Use <= to include the element at index n
+    if(left <= n && arr[largest] < arr[left]){
+        largest = left;
+    }
+    if(right <= n && arr[largest] < arr[right]){
+        largest = right;
+    }
+
+    if(largest != i){
+        swap(arr[largest],arr[i]);
+        heapify(arr,n,largest);
+    }
+}
+
 int main(){
     heap h;
     h.insert(50);
@@ -41,5 +98,16 @@ int main(){
     h.insert(52);
     h.insert(54);
     h.print();
+    h.deletefromHeap();
+    h.print();
+    int arr[6] = {-1,54,53,55,52,50};
+    int n = 5;
+    for(int i = n/2; i>0; i--){
+        heapify(arr,n,i);
+    }
+    cout<< "printing the array now "<<endl;
+    for(int i = 1; i < n; i++){
+        cout<< arr[i]<<" ";
+    }cout<<endl;
     return 0;
 }
