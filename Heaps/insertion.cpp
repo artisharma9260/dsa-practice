@@ -89,6 +89,19 @@ void heapify(int arr[], int n, int i){
         heapify(arr,n,largest);
     }
 }
+void heapsort(int arr[], int n) {
+    int currentSize = n;
+    while(currentSize > 1) {
+        // Step 1: Swap root (largest) with the last element
+        swap(arr[currentSize], arr[1]);
+        
+        // Step 2: Reduce heap size (last element is now in sorted position)
+        currentSize--;
+        
+        // Step 3: Propagate the new root down to its correct position
+        heapify(arr, currentSize, 1);
+    }
+}
 
 int main(){
     heap h;
