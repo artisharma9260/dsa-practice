@@ -1,3 +1,5 @@
+#include<bits/stdc++.h>
+using namespace std;
 class Solution {
 public:
      bool possible(vector<int>& a,int mid,int m,int k){
