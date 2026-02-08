@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+class solution {
+public:
+    vector<int>getDivisors(int N){
+        vector<int>res;
+        for(int i = 1; i*i <= N; i++){
+            if(N % i == 0){
+                res.push_back(i);
+                
+                if(i != N / i){
+                    res.push_back(N/i);
+                }
+            }
+        }
+        return res;
+    }
+};
